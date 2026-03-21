@@ -228,10 +228,11 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_mtd7OhXT-dVJlqdMEgLbWQ_KpEeTWN3';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // --- FIX 1: URL Cleanup & Auto-SignOut Listener ---
-        supabaseClient.auth.onAuthStateChange(async (event, session) => {
+        // --- URL Cleanup & Success State Listener ---
+        supabaseClient.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
                 if (session) {
+                    // 1. Show the success message
                     const emailSection = document.getElementById('email-section');
                     if (emailSection) {
                         emailSection.innerHTML = `
@@ -244,11 +245,14 @@
                             </div>`;
                     }
                     
-                    // Clean the URL so it looks professional
+                    // 2. Clean the URL so it looks professional
                     window.history.replaceState({}, document.title, window.location.pathname);
                     
-                    // Secretly sign the user out so the form resets on the next refresh
-                    await supabaseClient.auth.signOut();
+                    // 3. Secretly sign the user out after a tiny delay
+                    // This clears the browser memory so the form resets on the next refresh
+                    setTimeout(async () => {
+                        await supabaseClient.auth.signOut();
+                    }, 500);
                 }
             }
         });
