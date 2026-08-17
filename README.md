@@ -8,7 +8,7 @@ Instead of a prescriptive "Yes/No" quiz, this tool allows users to visualize the
 
 ## 📖 How to Use
 
-1.  Open the [Live Demo](https://akcny.github.io/trip-builder/).
+1.  Open the [Live Demo](https://aaronkchan.github.io/trip-builder/).
 2.  Adjust the sliders to match your travel style.
 3.  Review the "Realities" section to ensure you are prepared for the environment.
 4.  Join the linked communities to finalize your itinerary!
